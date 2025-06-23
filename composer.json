@@ -1,0 +1,17 @@
+{
+  "name": "indianmodassir/postman",
+  "description": "A web-based tool for developers to test APIs, view responses, and manage workflows.",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Indian Modassir",
+      "email": "indianmodassir@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4"
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" id="title_bar" content="#ee6d3f">
+  <title>Postman | Indian Modassir</title>
+  <link rel="shortcut icon" href="icon/pm_favicon.png" type="image/png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dir-column">
+  
+  <!-- Postman Loader -->
+  <div class="pm-loader align-center">
+    <div class="loader">
+      <div style="--delay: 0s"></div>
+      <div style="--delay: 0.15s"></div>
+      <div style="--delay: 0.3s"></div>
+    </div>
+  </div>
+  <!-- End Loader Point -->
+
+  <!-- Top Nav Bar -->
+  <nav class="align-center">
+    <div class="logo-header align-center">
+      <img src="image/postman-icon.svg" alt="Postman" width="32" height="32">
+      <h2>Postman</h2>
+    </div>
+    <div class="settings switch-list" onclick="this.classList.toggle('show')">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <use href="icon/sprites.svg#setting"></use>
+      </svg>
+    </div>
+    <ul class="toggle-box">
+      <li>
+        <label for="theme" class="switch-list">
+          <span>Dark Theme</span>
+          <input type="checkbox" id="theme" class="switch-list" hidden>
+          <div class="switch"></div>
+        </label>
+      </li>
+      <li>
+        <label for="adv_method" class="switch-list">
+          <span>Advance Request Method</span>
+          <input type="checkbox" id="adv_method" class="switch-list" hidden>
+          <div class="switch"></div>
+        </label>
+      </li>
+      <li>
+        <label for="sidebar-toggle">History</label>
+      </li>
+      <li>
+        <label for="verify_ssl" class="switch-list">
+          <span>SSL certificate verification</span>
+          <input type="checkbox" id="verify_ssl" class="switch-list" hidden>
+          <div class="switch"></div>
+        </label>
+      </li>
+    </ul>
+  </nav>
+  <!-- End Nav Point -->
+
+  <!-- Root -->
+  <div id="root">
+    <!-- Left Side Bar -->
+    <section class="side-bar dir-column">
+      <div class="align-center top-bar">
+        <label for="sidebar-toggle">
+          <svg class="hidden back" width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <use href="icon/sprites.svg#dir-back"></use>
+          </svg>
+        </label>
+        <span style="flex-grow: 1;">History</span>
+        <span>
+          <button id="new">New</button>
+          <button id="clear">Clear</button>
+        </span>
+      </div>
+      <div class="filter align-center">
+        <input type="search" id="search" placeholder="Search URL or text" autocomplete="off">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <use href="icon/sprites.svg#filter"></use>
+        </svg>
+      </div>
+      <div class="history-section">
+        <ul class="histories scrollable">
+          <!-- <li class="align-center">
+            <span class="ws" data-date="01 Jan 2025 11:50 PM">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <use href="icon/sprites.svg#user"></use>
+              </svg>
+            </span>
+            <div class="wrap"><span class="history-req-type">GET</span></div>
+            <span class="history-req-url">https://example.com</span>
+            <span class="delete">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <use href="icon/sprites.svg#delete"></use>
+              </svg>
+            </span>
+          </li> -->
+        </ul>
+        <div class="no-history dir-column empty-state">
+          <img src="image/no-history.svg" alt="No History" draggable="false">
+          <div>
+            <h3>You haven't sent any requests.</h3>
+            <p>Any request you send in this workspace will appear here.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Side Bar Point -->
+
+    <!-- Section main content wrapper -->
+    <section id="content" class="dir-column">
+      <section class="primary-section dir-column">
+        <div class="align-center top-bar">
+          <div class="align-center">
+            <span class="http">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <use href="icon/sprites.svg#httpRequest"></use>
+              </svg>
+            </span>
+            <span class="req-url">Untitled Request</span>
+          </div>
+        </div>
+        <form action="server/proxy" method="POST">
+          <div class="group">
+            <select name="method" id="req_method">
+              <option style="color: var(--color-get-method)" value="GET">GET</option>
+              <option style="color: var(--color-post-method)" value="POST">POST</option>
+              <option style="color: var(--color-put-method)" value="PUT">PUT</option>
+              <option style="color: var(--color-patch-method)" value="PATCH">PATCH</option>
+              <option style="color: var(--color-delete-method)" value="DELETE">DELETE</option>
+              <option style="color: var(--color-head-method)" value="HEAD">HEAD</option>
+              <option style="color: var(--color-opt-method)" value="OPTIONS">OPTIONS</option>
+              <option class="adv-req-method" value="PURGE" hidden>PURGE</option>
+              <option class="adv-req-method" value="LOCK" hidden>LOCK</option>
+              <option class="adv-req-method" value="UNLOCK" hidden>UNLOCK</option>
+              <option class="adv-req-method" value="COPY" hidden>COPY</option>
+              <option class="adv-req-method" value="MKCOL" hidden>MKCOL</option>
+              <option class="adv-req-method" value="MOVE" hidden>MOVE</option>
+              <option class="adv-req-method" value="PROPFIND" hidden>PROPFIND</option>
+              <option class="adv-req-method" value="PROPPATCH" hidden>PROPPATCH</option>
+              <option class="adv-req-method" value="VIEW" hidden>VIEW</option>
+            </select>
+            <input type="text" name="url" id="req_url" placeholder="Enter URL or paste text">
+            <svg class="error" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <use href="icon/sprites.svg#error"></use>
+            </svg>
+          </div>
+          <div class="split-button align-center">
+            <button id="sendButton" class="btn-send">Send</button>
+            <button type="button" class="btn-down btn-send align-center" onclick="$('.tippy').self.classList.toggle('show')">
+              <i>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <use href="icon/sprites.svg#direction-down"></use>
+                </svg>
+              </i>
+            </button>
+            <button class="tippy" data-download="true"><div>Send and Download</div></button>
+          </div>
+        </form>
+
+        <!-- Primary Menu Bar -->
+        <div class="menu-bar align-center">
+          <ul class="tab-menu" data-menu="primary">
+            <li class="active" data-label="Query Params" data-prop="payload">Params</li>
+            <li data-prop="auth">Authorization</li>
+            <li data-label="Headers" data-prop="headers">Headers&nbsp;<span class="header-count counter">(2)</span></li>
+            <li data-prop="body">Body</li>
+          </ul>
+        </div>
+        <!-- End Menu Bar Point -->
+
+        <!-- Body Section -->
+        <div class="body primary-tab-section scrollable">
+          <ul>
+            <li>
+              <input type="radio" name="body" id="nobody" checked>
+              <label for="nobody">none</label>
+            </li>
+            <li>
+              <input type="radio" name="body" id="formData" class="body-data" data-prop="form-data">
+              <label for="formData">form-data</label>
+            </li>
+            <li>
+              <input type="radio" name="body" id="xfue" class="body-data" data-prop="form-encoded">
+              <label for="xfue">x-www-form-url-encoded</label>
+            </li>
+            <li>
+              <input type="radio" name="body" id="raw" data-prop="raw">
+              <label for="raw">raw</label>
+            </li>
+            <li>
+              <select id="raw_type">
+                <option value="text/plain">Text</option>
+                <option value="application/javascript">JavaScript</option>
+                <option value="application/json">JSON</option>
+                <option value="text/html">HTML</option>
+                <option value="application/xml">XML</option>
+              </select>
+            </li>
+          </ul>
+        </div>
+        <div class="json-editor">
+          <textarea id="raw_data" class="scrollable"></textarea>
+        </div>
+        <div class="no-content">This request does not have a body</div>
+        <!-- End Body Point -->
+
+        <!-- Authorization Section -->
+        <div class="auth primary-tab-section scrollable">
+          <section class="left">
+            <div class="wrap">
+              <strong>Type</strong>
+              <select id="auth_type">
+                <option value="no-auth" selected>No Auth</option>
+                <option value="api-auth">API Key</option>
+                <option value="bearer-auth">Bearer Token</option>
+                <option value="basic-auth">Basic Auth</option>
+              </select>
+            </div>
+            <span>The authorization header will be automatically generated when you send the request.</span>
+          </section>
+          <section class="right">
+            <div class="api-auth auth-section">
+              <div class="wrap">
+                <strong>Key</strong>
+                <input type="text" id="auth_key" placeholder="Key" autocomplete="off">
+              </div>
+              <div class="wrap">
+                <strong>Value</strong>
+                <input type="text" id="auth_value" placeholder="Value" autocomplete="off">
+              </div>
+              <div class="wrap">
+                <strong>Add to</strong>
+                <select id="switch_auth">
+                  <option value="headers">Header</option>
+                  <option value="params">Query Params</option>
+                </select>
+              </div>
+            </div>
+            <div class="bearer-auth auth-section">
+              <div class="wrap">
+                <strong>Token</strong>
+                <input type="text" id="auth_token" placeholder="Token" autocomplete="off">
+              </div>
+            </div>
+            <div class="basic-auth auth-section">
+              <div class="wrap">
+                <strong>Username</strong>
+                <input type="text" id="username" placeholder="Username" autocomplete="off">
+              </div>
+              <div class="wrap">
+                <strong>Password</strong>
+                <input type="text" id="password" placeholder="Password" autocomplete="off">
+              </div>
+            </div>
+            <div class="no-content no-auth show">This request does not use any authorization.</div>
+          </section>
+        </div>
+        <!-- End Authorization Point -->
+
+        <!-- URLParams Section -->
+        <div class="payload headers primary-tab-section scrollable show">
+          <div class="label">Query Params</div>
+          <table>
+            <thead>
+              <tr>
+                <th><input type="checkbox" id="allcheck" hidden checked></th>
+                <th>Key</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody class="params">
+              <!-- <tr>
+                <td>
+                  <div class="align-center td-group">
+                    <div class="grab">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <use href="icon/sprites.svg#reorder"></use>
+                      </svg>
+                    </div>
+                    <input type="checkbox" class="check" checked>
+                  </div>
+                </td>
+                <td>
+                  <span>
+                    <input type="text" class="param key" autocomplete="off">
+                    <select>
+                      <option value="text">Text</option>
+                      <option value="file">File</option>
+                    </select>
+                  </span>
+                </td>
+                <td>
+                  <span>
+                    <input type="text" class="param value" autocomplete="off">
+                    <div class="delete-row">
+                      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                        <use href="icon/sprites.svg#delete"></use>
+                      </svg>
+                    </div>
+                  </span>
+                </td>
+              </tr> -->
+            </tbody>
+            <tbody>
+              <tr class="main-row">
+                <td></td>
+                <td><input type="text" id="key" placeholder="Key" class="param" autocomplete="off"></td>
+                <td><input type="text" id="value" placeholder="Value" class="param" autocomplete="off"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <!-- End Primary Section Point -->
+
+      <!-- Secondry Section -->
+      <div class="secondry-section dir-column">
+        <!-- Error Handling State -->
+        <div class="response-state state-wrap dir-column">
+          <img src="image/hit-send.svg" class="illus" alt="Hit Sender" draggable="false" width="140">
+          <img src="image/astronaut.svg" class="illus" alt="Astronaut" draggable="false" width="120">
+          <div class="response-error">Enter the URL and click Send to get a response.</div>
+        </div>
+        <!-- End Error Handling State Point -->
+
+        <!-- Secondry Menu Bar -->
+        <div class="menu-bar">
+          <ul class="tab-menu" data-menu="secondry">
+            <li data-prop="response-text" class="active">Response</li>
+            <li data-prop="response-cookies">Cookies&nbsp;<span class="res-cookie-count counter">(2)</span></li>
+            <li data-prop="response-headers">Headers&nbsp;<span class="res-header-count counter">(10)</span></li>
+            <li data-prop="preview">Preview</li>
+          </ul>
+          <ul class="response-status">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <use href="icon/sprites.svg#connectionSecure"></use>
+              </svg>
+              Status <span class="status">200 OK</span>
+            </li>
+            <li>Time <span class="time">1774 ms</span></li>
+            <li>Size <span class="size">23.51 KB</span></li>
+          </ul>
+        </div>
+        <!-- End Menu Bar Point -->
+
+        <!-- Response View Section -->
+        <section class="response scrollable">
+          <!-- Response Text Section -->
+          <ul class="response-text secondry-tab-section show" id="response"></ul>
+          <!-- End Response Text Section -->
+          
+          <!-- Response Cookie Section -->
+          <div class="response-cookies secondry-tab-section">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Value</th>
+                  <th>Domain</th>
+                  <th>Path</th>
+                  <th>Expires</th>
+                  <th>HttpOnly</th>
+                  <th>Secure</th>
+                </tr>
+              </thead>
+              <tbody id="cookie-jar">
+                <!-- <tr>
+                  <td><input readonly>_cookie</td>
+                  <td><input readonly>xyz</td>
+                  <td><input readonly>example.com</td>
+                  <td><input readonly>/</td>
+                  <td><input readonly>seassion</td>
+                  <td><input readonly>true</td>
+                  <td><input readonly>true</td>
+                </tr> -->
+              </tbody>
+            </table>
+          </div>
+          <!-- End Response Cookie Point -->
+
+          <!-- Response Headers Section -->
+          <div class="response-headers secondry-tab-section">
+            <table>
+              <thead>
+                <tr>
+                  <th>Key</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody id="response-headers">
+                <!-- <tr>
+                  <td><input readonly>Content-Type</td>
+                  <td><input readonly>application/json</td>
+                </tr> -->
+              </tbody>
+            </table>
+          </div>
+          <!-- End Response Headers Point -->
+
+          <!-- Response Preview Frame -->
+          <iframe class="preview secondry-tab-section" id="preview" sandbox="allow-forms allow-scripts"></iframe>
+          <!-- End Frame Point -->
+
+          <!-- Response Cookie Empty State -->
+          <div class="dir-column state-wrap empty-state">
+            <img src="image/no-cookies.svg" alt="No Cookie" draggable="false">
+            <div>
+              <h3>No cookies received from the server</h3>
+              <p>All your cookies and their associated domains will appear here.</p>
+            </div>
+          </div>
+          <!-- End Empty State Point -->
+        </section>
+      </div>
+    </section>
+  </div>
+
+  <!-- Status Bar -->
+  <section class="status-bar align-center">
+    <input type="checkbox" id="sidebar-toggle" checked hidden>
+    <label for="sidebar-toggle">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <use href="icon/sprites.svg#sidebar"></use>
+      </svg>
+    </label>
+    <div class="network-status align-center">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <use href="icon/sprites.svg#success"></use>
+      </svg>
+      <div class="status-type online">online</div>
+    </div>
+    <span class="dev">Develope By Indian Modassir</span>
+  </section>
+  <!-- End Status Bar Point -->
+
+  <!-- Notification Toast -->
+  <div class="notifications-wrapper">
+    <div class="notification-box">
+      <div class="notification">
+        <div class="toast align-center">
+          <div class="toast-info">
+            <svg width="16" height="16" viewBox="0 0 16 16">
+              <use fill="#282828" href="icon/sprites.svg#info"></use>
+            </svg>
+          </div>
+          <div class="toast-body">
+            <div class="html-root">Downloaded Response</div>
+          </div>
+          <div class="toast-dismiss align-center" onclick="hideToast()">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+              <use fill="#282828" href="icon/sprites.svg#close"></use>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Notification Point -->
+
+  <!-- Network -->
+  <div class="tippy network-wrap">
+    <div class="tippy-content">
+      <div class="align-center">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <use href="icon/sprites.svg#online"></use>
+        </svg>
+        <h4>Looks like you are offline</h4>
+      </div>
+      <p>Until you're back online, data in your workspace may not be up to date.</p>
+    </div>
+  </div>
+  <!-- End Network Point -->
+
+<script src="script/common.js"></script>
+<script src="script/setup.js"></script>
+<script src="script/sender.js"></script>
+</body>
+</html>

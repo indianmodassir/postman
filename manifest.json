@@ -1,0 +1,39 @@
+{
+  "name": "Postman",
+  "short_name": "PM",
+  "description": "A web-based API testing tool for developers to send requests, view responses, and manage API workflows.",
+  "id": "com.postman.com",
+  "start_url": "\/",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "orientation": "portrait",
+  "display": "standalone",
+  "override_display": ["fullscreen", "standalone"],
+  "icons": [
+    {
+      "src": "icon/pm-32x32.svg",
+      "sizes": "32x32",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "icon/pm-48x48.svg",
+      "sizes": "48x48",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "icon/pm-192x192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "icon/pm-128x128.svg",
+      "sizes": "128x128",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "icon/pm-512x512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
