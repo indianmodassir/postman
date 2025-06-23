@@ -30,7 +30,7 @@ A fully functional **Postman** web application for API testing and development, 
 - Composer installed globally ([Get Composer](https://getcomposer.org/))
 
 ### Steps
+Add the package via Composer
 
-1. Add the package via Composer  
-   ```bash
-   composer require indianmodassir/postman
+```bash
+composer create-project indianmodassir/postman
