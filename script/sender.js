@@ -49,6 +49,8 @@ function addHistory(method, url, color, dt, si, noStore) {
     histories.push({method, url, color, dt, si});
     $.setStorage("histories", histories);
   }
+
+  $('.histories').self.dataset['history'] = true;
 }
 
 function deleteHistory(e, history) {
